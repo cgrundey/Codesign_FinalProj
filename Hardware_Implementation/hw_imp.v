@@ -156,10 +156,10 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
         $display("hello");
       end
       else if(rounds == 4'd1) begin
-        text[20:14] = text[20:14] ^ 7'h5A;
+        text[20:14] = text[20:14] ^ 7'h34;
       end
       else if(rounds == 4'd2) begin
-        text[20:14] = text[20:14] ^ 7'h33;
+        text[20:14] = text[20:14] ^ 7'h73;
       end
       else if(rounds == 4'd3) begin
         text[20:14] = text[20:14] ^ 7'h66;

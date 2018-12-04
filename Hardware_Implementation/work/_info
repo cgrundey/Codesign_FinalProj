@@ -1,0 +1,73 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/wesh9/hwswfinal
+vhw_imp
+Z0 !s110 1543902125
+!i10b 1
+!s100 VL?GQMKa?I5YC@B=l:k9D3
+Im8>07L6;J]>>6oLi?1;FB0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation
+w1543901624
+8C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp.v
+FC:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp.v
+L0 4
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1543902125.000000
+!s107 C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp.v|
+!i113 1
+Z5 o-work work
+Z6 tCvgOpt 0
+vhw_imp_tb
+R0
+!i10b 1
+!s100 fdEMdB@C]n?6G^DS`5iV=1
+In@YFbTk4^MKeneEKi;Z>92
+R1
+R2
+w1543902109
+8C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp_tb.v
+FC:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp_tb.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp_tb.v|
+!i113 1
+R5
+R6
+vsbox
+!s110 1543902126
+!i10b 1
+!s100 UN7QhZ``]AVQ:lWXIm7460
+I7@MzzddWh;Sea^Cd]mde43
+R1
+R2
+w1543901340
+8C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/sbox.v
+FC:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/sbox.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/sbox.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/sbox.v|
+!i113 1
+R5
+R6
