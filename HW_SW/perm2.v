@@ -1,3 +1,5 @@
+// TODO: two different modules
+
 module perm2(a, b, res);
 	input [31:0] a, b;
 	output [63:0] res;

@@ -134,7 +134,6 @@ alt_u32 readTimer() {
 }
 
 
-
 struct Alt_u128 enRoundKey(struct Alt_u128 key) {
 	 struct Alt_u128 roundKey;
 
