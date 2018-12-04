@@ -200,8 +200,7 @@ module hw_decrypt(clk, address, reset, waitrequest, write, writedata, read, read
         end
 
         rounds = rounds -1;
-        $display("round %x", rounds);
-        $display("RT %x", text);
+        $display("Round %x", text);
         next_state = DECRYPT;
       end
 
