@@ -1,0 +1,15 @@
+C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/sbox.v {1 {vlog -work work -stats=none C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/sbox.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module sbox
+
+Top level modules:
+	sbox
+
+} {} {}} C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp.v {1 {vlog -work work -stats=none C:/Users/wesh9/hwswfinal/Codesign_FinalProj/Hardware_Implementation/hw_imp.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module hw_imp
+
+Top level modules:
+	hw_imp
+
+} {} {}}
