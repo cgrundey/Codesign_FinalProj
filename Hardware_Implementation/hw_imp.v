@@ -38,7 +38,8 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
               ENCALC = 8'h0F,
               SBOX1 = 8'h10,
               SBOX2 = 8'h11,
-              ENFINAL = 8'h12;
+              ENFINAL = 8'h12,
+              CONST = 8'h13;
 
 
 
@@ -46,7 +47,6 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
 
     if (reset) begin
       state = START;
-      waitrequest = 0;
     end
     else begin
       state = next_state;
@@ -119,6 +119,7 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
           tempHalf = {roundKey[47:32], roundKey[63:48], roundKey[15:0], roundKey[31:16]};
           roundKey[63:0] = tempHalf ^ roundKey[127:64];
           roundKey[127:64] = tempHalf;
+
           //Step3: update upper half
           text[127:64] = text[127:64] ^ roundKey[127:64];
           next_state = SBOX1;
@@ -144,36 +145,81 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
 
     SBOX3: begin
       text[127:96] = sbox_out;
+      $display("SBOX %x", text);
+      next_state = CONST;
+    end
 
+    CONST: begin
       //add round constant
-      text[20:14] = (rounds == 7'd0) ? text[20:14] + 7'h5A
-                    :(rounds == 7'd1) ? text[20:14] + 7'h34
-                    :(rounds == 7'd2) ? text[20:14] + 7'h73
-                    :(rounds == 7'd3) ? text[20:14] + 7'h66
-                    :(rounds == 7'd4) ? text[20:14] + 7'h57
-                    :(rounds == 7'd5) ? text[20:14] + 7'h35
-                    :(rounds == 7'd6) ? text[20:14] + 7'h71
-                    :(rounds == 7'd7) ? text[20:14] + 7'h62
-                    :(rounds == 7'd8) ? text[20:14] + 7'h5F
-                    :(rounds == 7'd9) ? text[20:14] + 7'h25
-                    :(rounds == 7'd10) ? text[20:14] + 7'h51
-                    :text[20:14] + 7'h22;
+      if(rounds == 4'd0) begin
+        text[20:14] = text[20:14] ^ 7'h5A;
+        $display("hello");
+      end
+      else if(rounds == 4'd1) begin
+        text[20:14] = text[20:14] ^ 7'h5A;
+      end
+      else if(rounds == 4'd2) begin
+        text[20:14] = text[20:14] ^ 7'h33;
+      end
+      else if(rounds == 4'd3) begin
+        text[20:14] = text[20:14] ^ 7'h66;
+      end
+      else if(rounds == 4'd4) begin
+        text[20:14] = text[20:14] ^ 7'h57;
+      end
+      else if(rounds == 4'd5) begin
+        text[20:14] = text[20:14] ^ 7'h35;
+      end
+      else if(rounds == 4'd6) begin
+        text[20:14] = text[20:14] ^ 7'h71;
+      end
+      else if(rounds == 4'd7) begin
+        text[20:14] = text[20:14] ^ 7'h62;
+      end
+      else if(rounds == 4'd8) begin
+        text[20:14] = text[20:14] ^ 7'h5F;
+      end
+      else if(rounds == 4'd9) begin
+        text[20:14] = text[20:14] ^ 7'h25;
+      end
+      else if(rounds == 4'd10) begin
+        text[20:14] = text[20:14] ^ 7'h51;
+      end
+      else if(rounds == 4'd11) begin
+        text[20:14] = text[20:14] ^ 7'h22;
+      end
+      // assign text[20:14] = (rounds == 4'd0) ? text[20:14] + 7'h5A
+      //               :(rounds == 4'd1) ? text[20:14] + 7'h34
+      //               :(rounds == 4'd2) ? text[20:14] + 7'h73
+      //               :(rounds == 4'd3) ? text[20:14] + 7'h66
+      //               :(rounds == 4'd4) ? text[20:14] + 7'h57
+      //               :(rounds == 4'd5) ? text[20:14] + 7'h35
+      //               :(rounds == 4'd6) ? text[20:14] + 7'h71
+      //               :(rounds == 4'd7) ? text[20:14] + 7'h62
+      //               :(rounds == 4'd8) ? text[20:14] + 7'h5F
+      //               :(rounds == 4'd9) ? text[20:14] + 7'h25
+      //               :(rounds == 4'd10) ? text[20:14] + 7'h51
+      //               :text[20:14] + 7'h22;
+
       next_state = ENCALC;
     end
 
 
     ENCALC: begin
       //step6
+
       text[63:0] = text[63:0] ^ roundKey[63:0];
       //step7 perm1
       tempHalf = {text[47:32], text[63:48], text[15:0], text[31:16]};
+      //perm2
       text[63:0] = {tempHalf[42:0], tempHalf[63:43]};
-
+      $display("PERM2 %x", text);
       tempHalf = text[127:64];
       text[127:64] = text[127:64] ^ text[63:0];
       text[63:0] = tempHalf;
 
       rounds = rounds + 1;
+      $display("Round %x", text);
       next_state = ENCRYPT;
 
         // //step6: xor
@@ -203,6 +249,7 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
       //Decrypt State machine
       //output states
       OUT1: begin
+        $display("FINAL %x", text);
         if(read == 1'b1) begin
           readdata = text[31:0];
           next_state = OUT2;
