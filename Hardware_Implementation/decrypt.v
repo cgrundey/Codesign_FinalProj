@@ -1,3 +1,7 @@
+// Hardware decryption module
+// Wes Hirshemer
+// Brian Pangburn
+// Colin Grundey
 
 module hw_decrypt(clk, address, reset, waitrequest, write, writedata, read, readdata);
 
