@@ -1,3 +1,8 @@
+// S-box for encryption algorithm
+// Wes Hirsheimer
+// Brian Pangburn
+// Colin Grundey
+
 module sbox(inText, outText);
 
   input [31:0] inText;
@@ -142,11 +147,5 @@ module sbox(inText, outText);
           :(inText[3:0] == 4'hD) ? 4'h4
           :(inText[3:0] == 4'hE) ? 4'hB
           :4'h8;
-
-
-
-
-
-
 
 endmodule
