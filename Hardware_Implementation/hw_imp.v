@@ -1,5 +1,7 @@
-// Hardware Implementation for Final Project
-// Encrypt and Decrypt functions
+// Hardware Encryption Implementation
+// Wes Hirshemer
+// Brian Pangburn
+// Colin Grundey
 
 module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata);
 
