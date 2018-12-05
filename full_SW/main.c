@@ -26,6 +26,7 @@ struct Alt_u128 {
 	alt_u64 low;
 };
 
+// helper sub-functions
 struct Alt_u128 enRoundKey(struct Alt_u128 key);
 struct Alt_u128 deRoundKey(struct Alt_u128 key);
 alt_u64 perm1(alt_u64 input);
@@ -133,7 +134,7 @@ alt_u32 readTimer() {
 	return IORD(0x5000, 0x0);
 }
 
-
+// Round key for encryption
 struct Alt_u128 enRoundKey(struct Alt_u128 key) {
 	 struct Alt_u128 roundKey;
 
@@ -144,6 +145,7 @@ struct Alt_u128 enRoundKey(struct Alt_u128 key) {
      return roundKey;
 }
 
+// Round key for decryption
 struct Alt_u128 deRoundKey(struct Alt_u128 key) {
      struct Alt_u128 roundKey;
 
@@ -154,6 +156,7 @@ struct Alt_u128 deRoundKey(struct Alt_u128 key) {
      return roundKey;
 }
 
+// Permutation 1
 alt_u64 perm1(alt_u64 input) {
      // Partition into 16 bit segments
      alt_u64 in3 = 0xFFFF & input;
@@ -166,6 +169,7 @@ alt_u64 perm1(alt_u64 input) {
      return output;
 }
 
+// Permutation 2
 alt_u64 perm2(alt_u64 input) {
      // circular shift to the right 21 bits
 	 alt_u64 bottom = input >> 43;
@@ -174,6 +178,7 @@ alt_u64 perm2(alt_u64 input) {
      return output;
 }
 
+// Permutation 2 invedrse
 alt_u64 perm2inv(alt_u64 input) {
      // circular shift to the right 43 bits
 	 alt_u64 top = ((input & 0x1FFFFF) << 43);
@@ -182,6 +187,7 @@ alt_u64 perm2inv(alt_u64 input) {
      return output;
 }
 
+// S-box helper function
 alt_u4 subHelp(alt_u4 input) {
      alt_u4 output;
 
@@ -264,6 +270,7 @@ alt_u64 subBytes(alt_u64 input) {
      return output;
 }
 
+// Inverse S-box
 alt_u4 invSubHelp(alt_u4 input) {
      alt_u4 output;
 
@@ -346,6 +353,7 @@ alt_u64 invSubBytes(alt_u64 input) {
      return output;
 }
 
+// Round Constant Helper Function
 alt_u64 addRoundConstant(alt_u64 input, int i) {
      alt_u64 output = input;
      // clear bits 20:14 to be
@@ -401,6 +409,7 @@ alt_u64 addRoundConstant(alt_u64 input, int i) {
      return output;
 }
 
+// convert pointer to 128-bit
 struct Alt_u128 toAltU128(const alt_u8 * input) {
 	struct Alt_u128 output;
 	output.high = 0;
@@ -422,6 +431,7 @@ struct Alt_u128 toAltU128(const alt_u8 * input) {
 	return output;
 }
 
+// Convert back to pointer 
 void toAltU8(struct Alt_u128 input, alt_u8 * output) {
 	for (int i = 0; i < 16; i++) {
 		alt_u8 temp;
@@ -438,6 +448,7 @@ void toAltU8(struct Alt_u128 input, alt_u8 * output) {
 
 }
 
+// encryption algorithm
 void encrypt(const alt_u8 * plainText, const alt_u8 * key, alt_u8 * cipherText) {
 	struct Alt_u128 roundKey = toAltU128(key);
 	struct Alt_u128 tempPlain = toAltU128(plainText);
@@ -467,6 +478,7 @@ void encrypt(const alt_u8 * plainText, const alt_u8 * key, alt_u8 * cipherText) 
 	toAltU8(ct, cipherText);
 }
 
+// decryption algorithm
 void decrypt(const alt_u8 * cipherText, const alt_u8 * key, alt_u8 * plainText) {
 	struct Alt_u128 roundKey = toAltU128(key);
 	struct Alt_u128 tempCipher = toAltU128(cipherText);
@@ -493,5 +505,5 @@ void decrypt(const alt_u8 * cipherText, const alt_u8 * key, alt_u8 * plainText) 
 	pt.high = high;
 	pt.low = low;
 
-	toAltU8(pt, plainText);
+	toAltU8(pt, plainText); // convert back
 }
