@@ -1,3 +1,8 @@
+// Inverse S-box for decryption algorithm
+// Wes Hirsheimer
+// Brian Pangburn
+// Colin Grundey
+
 module invsbox(inText, outText);
 
   input [31:0] inText;
@@ -142,11 +147,5 @@ module invsbox(inText, outText);
           :(inText[3:0] == 4'hD) ? 4'h2
           :(inText[3:0] == 4'hE) ? 4'h9
           :4'h5;
-
-
-
-
-
-
 
 endmodule
