@@ -145,7 +145,6 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
 
     SBOX3: begin
       text[127:96] = sbox_out;
-      $display("SBOX %x", text);
       next_state = CONST;
     end
 
@@ -153,7 +152,6 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
       //add round constant
       if(rounds == 4'd0) begin
         text[20:14] = text[20:14] ^ 7'h5A;
-        $display("hello");
       end
       else if(rounds == 4'd1) begin
         text[20:14] = text[20:14] ^ 7'h34;
@@ -213,7 +211,6 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
       tempHalf = {text[47:32], text[63:48], text[15:0], text[31:16]};
       //perm2
       text[63:0] = {tempHalf[42:0], tempHalf[63:43]};
-      $display("PERM2 %x", text);
       tempHalf = text[127:64];
       text[127:64] = text[127:64] ^ text[63:0];
       text[63:0] = tempHalf;
@@ -222,27 +219,6 @@ module hw_imp(clk, address, reset, waitrequest, write, writedata, read, readdata
       $display("Round %x", text);
       next_state = ENCRYPT;
 
-        // //step6: xor
-        // #5
-        // text[63:0] = text[63:0] ^ roundKey[63:0];
-        //
-        // //step7: perm2(perm1(textlow))
-        // //perm1
-        // #5
-        // tempHalf = {text[31:16], text[15:0], text[63:48], text[47:32]};
-        // //perm2
-        // #5
-        // tempHalf = {tempHalf[42:0], tempHalf[63:43]};
-        // #5
-        // text[63:0] = tempHalf;
-        // //step8
-        // #5
-        // tempHalf = text[127:64];
-        // //step9
-        // #5
-        // text[127:64] = text[127:64] ^ text[63:0];
-        // //step 10
-        // #5
     end
 
 
