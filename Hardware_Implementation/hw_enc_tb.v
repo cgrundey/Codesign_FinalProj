@@ -5,6 +5,7 @@ module hw_enc_tb();
 
   reg clk, address, write, read, reset;
   reg [31:0] writedata;
+  reg [63:0] counter;
 
   wire [31:0] readdata;
   wire waitrequest;
@@ -20,6 +21,7 @@ module hw_enc_tb();
 
   initial begin
     clk = 0;
+    counter = 0;
     reset = 1;
     #(PERIOD*2) reset = 0;
     write = 1;
@@ -47,8 +49,9 @@ module hw_enc_tb();
 
   end
 
-  always
+  always begin
     #(PERIOD/2) clk = ~clk;
-
+    counter = counter + 1;
+  end
 
 endmodule

@@ -5,6 +5,7 @@ module hw_imp_tb();
 
   reg clk, address, write, read, reset;
   reg [31:0] writedata;
+  reg [63:0] counter;
 
   wire [31:0] readdata;
   wire waitrequest;
@@ -67,7 +68,9 @@ module hw_imp_tb();
     // read = 1;
   end
 
-  always
+  always begin
     #(PERIOD/2) clk = ~clk;
+    counter = counter + 1;
+  end
 
 endmodule
